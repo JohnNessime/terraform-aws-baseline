@@ -1,4 +1,4 @@
-# terraform-aws-baseline
+# Terraform AWS Baseline
 
 A secure-by-default AWS account baseline in Terraform — encrypted remote state,
 a multi-AZ VPC with an isolated database tier, and IAM that eliminates every
