@@ -90,6 +90,29 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0 # full history — scan every commit, not just the tip
-      - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+
+      # The gitleaks binary directly, rather than gitleaks-action. Two reasons:
+      #   1. The action scans only the commits in the push event, which it calls
+      #      a "partial scan". This repo wants every commit checked, always.
+      #   2. On an initial push, event.before is the all-zeros SHA; the action
+      #      hands that to git, git writes to stderr, and the action treats any
+      #      stderr as fatal — a guaranteed red build on a repo's first push.
+      # It also sidesteps the action's licence requirement for org-owned repos.
+      - name: Install gitleaks
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          set -euo pipefail
+          curl -sSfL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo install -m 0755 gitleaks /usr/local/bin/gitleaks
+          rm -f gitleaks gitleaks.tar.gz
+          gitleaks version
+
+      # --log-opts=--all walks every ref, so the scan covers the whole history
+      # rather than just the current tip. --redact keeps any finding out of the
+      # public log: the job fails and tells you where, without reprinting the
+      # secret into a world-readable build log.
+      - name: Scan full history
+        run: gitleaks detect --source . --log-opts=--all --redact --verbose
