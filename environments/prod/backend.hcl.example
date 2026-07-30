@@ -1,0 +1,11 @@
+# Copy to backend.hcl and fill from the bootstrap module's outputs:
+#   terraform -chdir=../../bootstrap output
+# Then: terraform init -backend-config=backend.hcl
+#
+# backend.hcl is gitignored — it names the state bucket, which embeds the
+# account ID.
+
+bucket         = "REPLACE-with-state_bucket_name-output"
+region         = "us-east-1"
+dynamodb_table = "REPLACE-with-lock_table_name-output"
+kms_key_id     = "REPLACE-with-kms_key_arn-output"
