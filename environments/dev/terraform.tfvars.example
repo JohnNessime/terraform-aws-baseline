@@ -1,0 +1,23 @@
+# Copy to terraform.tfvars and edit. terraform.tfvars is gitignored — it can
+# hold ARNs and other account-specific values.
+
+aws_region  = "us-east-1"
+project     = "baseline"
+owner       = "platform-team"
+cost_center = "CC-1001"
+
+# RFC 1918 documentation range.
+vpc_cidr = "10.10.0.0/16"
+
+# GitHub repo whose `develop` branch may assume the dev CI role.
+github_org  = "your-org"
+github_repo = "terraform-aws-baseline"
+
+# Who may assume the read-only auditor role (MFA required). Placeholder ARN.
+auditor_principal_arns = ["arn:aws:iam::123456789012:role/Example"]
+
+# From the bootstrap module's outputs (optional — grants the CI role scoped
+# state access). Placeholder ARNs shown.
+state_bucket_arn     = "arn:aws:s3:::REPLACE-state-bucket"
+state_lock_table_arn = "arn:aws:dynamodb:us-east-1:123456789012:table/Example"
+state_kms_key_arn    = "arn:aws:kms:us-east-1:123456789012:key/Example"

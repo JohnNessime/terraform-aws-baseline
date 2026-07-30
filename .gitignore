@@ -25,6 +25,11 @@ crash.*.log
 plan.out
 plan.json
 
+# Backend partial-config — the real file names the state bucket (which embeds
+# the account ID). Only the .example is tracked.
+backend.hcl
+!backend.hcl.example
+
 # ---------------------------------------------------------------------------
 # Credentials and keys
 # ---------------------------------------------------------------------------
