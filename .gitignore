@@ -1,0 +1,52 @@
+# ---------------------------------------------------------------------------
+# Terraform state — NEVER commit. State files contain resource attributes and
+# can contain plaintext secrets (RDS passwords, generated keys, tokens).
+# ---------------------------------------------------------------------------
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl.bak
+crash.log
+crash.*.log
+
+# ---------------------------------------------------------------------------
+# Variable files — may contain account IDs, CIDRs, ARNs, credentials.
+# Only *.tfvars.example is tracked.
+# ---------------------------------------------------------------------------
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+!example.tfvars
+
+# Plan output — a plan is a readable dump of your infrastructure
+*.tfplan
+*.tfplan.*
+plan.out
+plan.json
+
+# ---------------------------------------------------------------------------
+# Credentials and keys
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.ppk
+*.key
+!*.pub
+credentials
+.aws/
+.envrc
+
+# CI / tooling artefacts
+.checkov.baseline
+results_*.json
+*.sarif
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
