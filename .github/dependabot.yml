@@ -15,6 +15,13 @@ updates:
     labels:
       - "dependencies"
       - "terraform"
+    ignore:
+      # This repo pins the AWS provider to ~> 5.70 deliberately. A major bump
+      # (5.x → 6.x) carries breaking changes and is a migration to plan, not a
+      # patch to merge — the v6 PRs Dependabot opened failed `validate`. Minor
+      # and patch updates still come through automatically.
+      - dependency-name: "hashicorp/aws"
+        update-types: ["version-update:semver-major"]
 
   # Keep the SHA-pinned GitHub Actions current — Dependabot bumps the pin and
   # updates the trailing version comment, so pinning costs nothing in upkeep.
