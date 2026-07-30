@@ -10,6 +10,12 @@
 crash.log
 crash.*.log
 
+# The dependency lock file belongs to the ROOT module (bootstrap, environments/*),
+# where it pins provider checksums across every platform CI runs on. Reusable
+# child modules under modules/ don't select providers, so a lock committed there
+# is noise — and a single-platform one breaks init on a different OS.
+modules/*/.terraform.lock.hcl
+
 # ---------------------------------------------------------------------------
 # Variable files — may contain account IDs, CIDRs, ARNs, credentials.
 # Only *.tfvars.example is tracked.
