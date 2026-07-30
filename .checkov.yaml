@@ -1,0 +1,15 @@
+# Checkov configuration — static IaC scanning, zero cloud access.
+#
+# There is deliberately NO `skip-check:` list here. A blanket skip list hides
+# risk behind a green badge. Every suppression in this repo lives inline at the
+# resource it applies to, as `#checkov:skip=CKV_AWS_XXX:<real reason>`, so each
+# exception is reviewable next to the code that earns it.
+framework:
+  - terraform
+
+# Third-party modules are out of scope for this repo's own posture, and pulling
+# them would need network access CI must not require.
+download-external-modules: false
+
+compact: true
+quiet: true
