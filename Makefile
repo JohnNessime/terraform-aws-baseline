@@ -3,7 +3,7 @@
 # cloud access of any kind.
 
 # Order matters: modules first (leaf → composition), then the roots.
-TF_DIRS := modules/tags modules/vpc modules/iam bootstrap environments/dev environments/prod
+TF_DIRS := modules/tags modules/vpc modules/iam modules/detective bootstrap environments/dev environments/prod
 
 .PHONY: all fmt fmt-fix validate lint scan clean help
 

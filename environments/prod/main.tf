@@ -33,6 +33,25 @@ module "vpc" {
   flow_log_retention_days = 365
 }
 
+module "detective" {
+  source = "../../modules/detective"
+
+  name_prefix = module.tags.name_prefix
+
+  enable_cloudtrail = true
+
+  # GuardDuty, Config, and Security Hub are one-per-account-per-region. Prod
+  # owns them for the account; dev leaves them off so a shared-account apply
+  # doesn't collide. Same reasoning as the OIDC provider, inverted — see
+  # docs/decisions/0005-detective-controls.md.
+  enable_guardduty    = true
+  enable_config       = true
+  enable_security_hub = true
+
+  log_retention_days  = 365
+  log_expiration_days = 365
+}
+
 module "iam" {
   source = "../../modules/iam"
 

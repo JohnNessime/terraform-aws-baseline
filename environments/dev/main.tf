@@ -33,6 +33,26 @@ module "vpc" {
   flow_log_retention_days = 7
 }
 
+module "detective" {
+  source = "../../modules/detective"
+
+  name_prefix = module.tags.name_prefix
+
+  # Dev keeps its own trail — CloudTrail is not an account singleton, and an
+  # audit log you only have in prod is an audit log you find out you needed.
+  enable_cloudtrail = true
+
+  # GuardDuty, Config, and Security Hub are one-per-account-per-region. Prod
+  # enables them for the account; enabling here too would fail the second apply
+  # when dev and prod share an AWS account. Flip these on if dev has its own.
+  enable_guardduty    = false
+  enable_config       = false
+  enable_security_hub = false
+
+  log_retention_days  = 30
+  log_expiration_days = 90
+}
+
 module "iam" {
   source = "../../modules/iam"
 

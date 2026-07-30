@@ -47,6 +47,7 @@ No providers.
 
 | Name | Source | Version |
 | ---- | ------ | ------- |
+| <a name="module_detective"></a> [detective](#module\_detective) | ../../modules/detective | n/a |
 | <a name="module_iam"></a> [iam](#module\_iam) | ../../modules/iam | n/a |
 | <a name="module_tags"></a> [tags](#module\_tags) | ../../modules/tags | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../modules/vpc | n/a |
@@ -76,9 +77,11 @@ No resources.
 | Name | Description |
 | ---- | ----------- |
 | <a name="output_auditor_role_arn"></a> [auditor\_role\_arn](#output\_auditor\_role\_arn) | MFA-gated read-only auditor role ARN. |
+| <a name="output_cloudtrail_arn"></a> [cloudtrail\_arn](#output\_cloudtrail\_arn) | ARN of the environment's CloudTrail trail. |
 | <a name="output_database_subnet_ids"></a> [database\_subnet\_ids](#output\_database\_subnet\_ids) | Isolated database subnet IDs, keyed by AZ. |
 | <a name="output_ec2_instance_profile_name"></a> [ec2\_instance\_profile\_name](#output\_ec2\_instance\_profile\_name) | Instance profile granting SSM Session Manager access. |
 | <a name="output_github_actions_role_arn"></a> [github\_actions\_role\_arn](#output\_github\_actions\_role\_arn) | Role ARN for the dev GitHub Actions workflow to assume via OIDC. |
 | <a name="output_private_subnet_ids"></a> [private\_subnet\_ids](#output\_private\_subnet\_ids) | Private subnet IDs, keyed by AZ. |
+| <a name="output_security_log_bucket_name"></a> [security\_log\_bucket\_name](#output\_security\_log\_bucket\_name) | Bucket receiving CloudTrail (and Config, where enabled) data. |
 | <a name="output_vpc_id"></a> [vpc\_id](#output\_vpc\_id) | ID of the dev VPC. |
 <!-- END_TF_DOCS -->

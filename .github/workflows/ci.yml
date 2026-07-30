@@ -47,6 +47,7 @@ jobs:
           - modules/tags
           - modules/vpc
           - modules/iam
+          - modules/detective
           - bootstrap
           - environments/dev
           - environments/prod
@@ -75,7 +76,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           set -e
-          for d in modules/tags modules/vpc modules/iam bootstrap environments/dev environments/prod; do
+          for d in modules/tags modules/vpc modules/iam modules/detective bootstrap environments/dev environments/prod; do
             echo "== tflint $d =="
             tflint --chdir="$d" --config="$GITHUB_WORKSPACE/.tflint.hcl"
           done
