@@ -173,6 +173,7 @@ have:
 | [`environments/dev/`](environments/dev/) | Thin root — single NAT, 7-day logs, 2 AZs. |
 | [`environments/prod/`](environments/prod/) | Thin root — per-AZ NAT, 365-day logs, 3 AZs. |
 | [`docs/`](docs/) | Architecture, bootstrap explainer, tagging, ADRs. |
+| [`docs/spec.md`](docs/spec.md) | The engineering contract — conventions, module requirements, definition of done. |
 
 ## Local development
 
