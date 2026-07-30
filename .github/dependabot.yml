@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # Keep the AWS provider pin current across every module and environment.
+  - package-ecosystem: "terraform"
+    directories:
+      - "/modules/vpc"
+      - "/modules/iam"
+      - "/bootstrap"
+      - "/environments/dev"
+      - "/environments/prod"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+    labels:
+      - "dependencies"
+      - "terraform"
+
+  # Keep the SHA-pinned GitHub Actions current — Dependabot bumps the pin and
+  # updates the trailing version comment, so pinning costs nothing in upkeep.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "dependencies"
+      - "github-actions"
