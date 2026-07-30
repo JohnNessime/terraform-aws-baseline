@@ -1,0 +1,46 @@
+# Checkov static security scan, in its own workflow.
+#
+# Split out from ci.yml so it carries its own status badge. A badge is only
+# worth showing if it can go red — a hardcoded "0 failed" image in the README
+# keeps claiming success long after a check starts failing.
+#
+# Actions are pinned to commit SHAs, not tags: tags are mutable, so a
+# compromised action repo can repoint `v4` at malicious code. A SHA cannot be
+# moved. Dependabot keeps the pins current.
+name: Checkov
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checkov-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkov:
+    name: checkov
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write # upload SARIF to GitHub code scanning
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: bridgecrewio/checkov-action@7b972723c44fb3d256283fac96fae5d7c1894bb7 # v12.3114.0
+        with:
+          directory: .
+          framework: terraform
+          config_file: .checkov.yaml
+          output_format: cli,sarif
+          output_file_path: console,results.sarif
+          soft_fail: false
+      # Upload even when checkov fails, so findings surface in the Security tab.
+      - uses: github/codeql-action/upload-sarif@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
+        if: always()
+        with:
+          sarif_file: results.sarif
+          category: checkov

@@ -6,7 +6,7 @@ long-lived credential — so a new account starts from a defensible posture
 instead of a blank console.
 
 [![CI](https://github.com/JohnNessime/terraform-aws-baseline/actions/workflows/ci.yml/badge.svg)](https://github.com/JohnNessime/terraform-aws-baseline/actions/workflows/ci.yml)
-[![Checkov](https://img.shields.io/badge/checkov-193%20passed%20%7C%200%20failed-brightgreen)](https://www.checkov.io/)
+[![Checkov](https://github.com/JohnNessime/terraform-aws-baseline/actions/workflows/checkov.yml/badge.svg)](https://github.com/JohnNessime/terraform-aws-baseline/actions/workflows/checkov.yml)
 [![Terraform](https://img.shields.io/badge/terraform-%E2%89%A5%201.6-7B42BC)](https://developer.hashicorp.com/terraform)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
