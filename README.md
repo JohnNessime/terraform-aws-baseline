@@ -10,8 +10,6 @@ instead of a blank console.
 [![Terraform](https://img.shields.io/badge/terraform-%E2%89%A5%201.6-7B42BC)](https://developer.hashicorp.com/terraform)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-> A reference implementation. It is not running in production and has not served
-> real traffic — it is a worked example of how I'd lay an account down.
 
 ## Architecture
 
